@@ -1,76 +1,98 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 const ParticlesBackground = () => {
   useEffect(() => {
-    const createParticle = () => {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.cssText = `
-        position: fixed;
-        width: 2px;
-        height: 2px;
-        background: #3b82f6;
-        border-radius: 50%;
-        pointer-events: none;
-        opacity: 0.6;
-        z-index: -1;
-        left: ${Math.random() * 100}vw;
-        top: ${Math.random() * 100}vh;
-        animation: float ${5 + Math.random() * 10}s infinite linear;
-      `;
-      
-      document.body.appendChild(particle);
-      
-      setTimeout(() => {
-        if (particle.parentNode) {
-          particle.parentNode.removeChild(particle);
-        }
-      }, 15000);
+    const loadParticles = async () => {
+      try {
+        const { tsParticles } = await import("@tsparticles/engine");
+        const { loadSlim } = await import("@tsparticles/slim");
+        
+        await loadSlim(tsParticles);
+        
+        await tsParticles.load("tsparticles", {
+          background: {
+            color: {
+              value: "transparent",
+            },
+          },
+          fpsLimit: 120,
+          interactivity: {
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push",
+              },
+              onHover: {
+                enable: true,
+                mode: "repulse",
+              },
+            },
+            modes: {
+              push: {
+                quantity: 4,
+              },
+              repulse: {
+                distance: 200,
+                duration: 0.4,
+              },
+            },
+          },
+          particles: {
+            color: {
+              value: "#3b82f6",
+            },
+            links: {
+              color: "#3b82f6",
+              distance: 150,
+              enable: true,
+              opacity: 0.2,
+              width: 1,
+            },
+            move: {
+              direction: "none",
+              enable: true,
+              outModes: {
+                default: "bounce",
+              },
+              random: false,
+              speed: 1,
+              straight: false,
+            },
+            number: {
+              density: {
+                enable: true,
+              },
+              value: 50,
+            },
+            opacity: {
+              value: 0.3,
+            },
+            shape: {
+              type: "circle",
+            },
+            size: {
+              value: { min: 1, max: 3 },
+            },
+          },
+          detectRetina: true,
+        });
+      } catch (error) {
+        console.error("Error loading particles:", error);
+      }
     };
 
-    // Add CSS animation
-    if (!document.getElementById('particles-style')) {
-      const style = document.createElement('style');
-      style.id = 'particles-style';
-      style.textContent = `
-        @keyframes float {
-          0% {
-            transform: translateY(100vh) rotate(0deg);
-            opacity: 0;
-          }
-          10% {
-            opacity: 0.6;
-          }
-          90% {
-            opacity: 0.6;
-          }
-          100% {
-            transform: translateY(-100vh) rotate(360deg);
-            opacity: 0;
-          }
-        }
-      `;
-      document.head.appendChild(style);
-    }
-
-    // Create particles periodically
-    const interval = setInterval(createParticle, 300);
-
-    return () => {
-      clearInterval(interval);
-      // Clean up existing particles
-      const particles = document.querySelectorAll('.particle');
-      particles.forEach(particle => {
-        if (particle.parentNode) {
-          particle.parentNode.removeChild(particle);
-        }
-      });
-    };
+    loadParticles();
   }, []);
 
-  return null;
+  return (
+    <div 
+      id="tsparticles" 
+      className="absolute inset-0 -z-10"
+      style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}
+    />
+  );
 };
 
 export default ParticlesBackground;
