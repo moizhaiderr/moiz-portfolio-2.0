@@ -100,7 +100,7 @@ const Contact = () => {
                 {[
                   { icon: Github, href: "https://github.com/moizhaiderr", label: "GitHub" },
                   { icon: Linkedin, href: "https://linkedin.com/in/moizhaider", label: "LinkedIn" },
-                  { icon: Twitter, href: "#", label: "Twitter" },
+                  { icon: Twitter, href: "https://x.com/44moiz", label: "Twitter" },
                 ].map((social) => (
                   <motion.a
                     key={social.label}
@@ -192,36 +192,6 @@ const Contact = () => {
             </form>
           </motion.div>
         </div>
-
-        {/* Additional Contact Options */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
-          <p className="text-gray-400 mb-6">
-            Prefer a different way to connect? I'm also available on these platforms:
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              { name: "LinkedIn", href: "#", color: "hover:text-blue-400" },
-              { name: "GitHub", href: "#", color: "hover:text-gray-300" },
-              { name: "Twitter", href: "#", color: "hover:text-blue-400" },
-              { name: "Discord", href: "#", color: "hover:text-purple-400" },
-            ].map((platform) => (
-              <motion.a
-                key={platform.name}
-                href={platform.href}
-                whileHover={{ scale: 1.05 }}
-                className={`px-4 py-2 border border-gray-700 rounded-full text-gray-400 ${platform.color} transition-colors duration-300`}
-              >
-                {platform.name}
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
