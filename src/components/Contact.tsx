@@ -47,19 +47,19 @@ const Contact = () => {
                 {
                   icon: Mail,
                   label: "Email",
-                  value: "moiz.haider@example.com",
-                  href: "mailto:moiz.haider@example.com"
+                  value: "moizhaider232@gmail.com",
+                  href: "mailto:moizhaider232@gmail.com"
                 },
                 {
                   icon: Phone,
                   label: "Phone",
-                  value: "+1 (555) 123-4567",
-                  href: "tel:+15551234567"
+                  value: "+92-343-7691578",
+                  href: "tel:+923437691578"
                 },
                 {
                   icon: MapPin,
                   label: "Location",
-                  value: "New York, NY",
+                  value: "Rawalpindi, Pakistan",
                   href: "#"
                 }
               ].map((contact, index) => (
@@ -98,8 +98,8 @@ const Contact = () => {
               <h4 className="text-white font-semibold mb-4">Follow Me</h4>
               <div className="flex space-x-4">
                 {[
-                  { icon: Github, href: "#", label: "GitHub" },
-                  { icon: Linkedin, href: "#", label: "LinkedIn" },
+                  { icon: Github, href: "https://github.com/moizhaiderr", label: "GitHub" },
+                  { icon: Linkedin, href: "https://linkedin.com/in/moizhaider", label: "LinkedIn" },
                   { icon: Twitter, href: "#", label: "Twitter" },
                 ].map((social) => (
                   <motion.a

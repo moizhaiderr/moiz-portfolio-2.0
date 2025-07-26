@@ -29,15 +29,39 @@ const Hero = () => {
       renderer.setSize(300, 300);
       renderer.setClearColor(0x000000, 0);
 
-      // Create cube
+      // Create cube with text faces
       const geometry = new THREE.BoxGeometry(2, 2, 2);
-      const material = new THREE.MeshBasicMaterial({
-        color: 0x3b82f6,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.8
+      
+      // Create materials for each face with text
+      const faces = ['CODE', 'DESIGN', 'TEST', 'DEPLOY', 'DEBUG', 'SHIP'];
+      const materials = faces.map((text, index) => {
+        // Create canvas for text texture
+        const canvas = document.createElement('canvas');
+        canvas.width = 256;
+        canvas.height = 256;
+        const context = canvas.getContext('2d');
+        
+        if (context) {
+          // Set background
+          context.fillStyle = index % 2 === 0 ? '#1e40af' : '#3b82f6';
+          context.fillRect(0, 0, 256, 256);
+          
+          // Set text style
+          context.fillStyle = '#ffffff';
+          context.font = 'bold 32px Arial';
+          context.textAlign = 'center';
+          context.textBaseline = 'middle';
+          
+          // Draw text
+          context.fillText(text, 128, 128);
+        }
+        
+        // Create texture from canvas
+        const texture = new THREE.CanvasTexture(canvas);
+        return new THREE.MeshBasicMaterial({ map: texture });
       });
-      cube = new THREE.Mesh(geometry, material);
+      
+      cube = new THREE.Mesh(geometry, materials);
       scene.add(cube);
 
       camera.position.z = 5;
@@ -141,9 +165,9 @@ const Hero = () => {
               className="flex gap-6 justify-center md:justify-start"
             >
               {[
-                { icon: Github, href: "#", label: "GitHub" },
-                { icon: Linkedin, href: "#", label: "LinkedIn" },
-                { icon: Mail, href: "#", label: "Email" },
+                { icon: Github, href: "https://github.com/moizhaiderr", label: "GitHub" },
+                { icon: Linkedin, href: "https://linkedin.com/in/moizhaider", label: "LinkedIn" },
+                { icon: Mail, href: "mailto:moizhaider232@gmail.com", label: "Email" },
               ].map((social, index) => (
                 <motion.a
                   key={social.label}

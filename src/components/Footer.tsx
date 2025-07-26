@@ -77,9 +77,9 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               {[
-                { icon: Github, href: '#', label: 'GitHub', color: 'hover:text-gray-300' },
-                { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:text-blue-400' },
-                { icon: Mail, href: '#', label: 'Email', color: 'hover:text-green-400' },
+                { icon: Github, href: 'https://github.com/moizhaiderr', label: 'GitHub', color: 'hover:text-gray-300' },
+                { icon: Linkedin, href: 'https://linkedin.com/in/moizhaider', label: 'LinkedIn', color: 'hover:text-blue-400' },
+                { icon: Mail, href: 'mailto:moizhaider232@gmail.com', label: 'Email', color: 'hover:text-green-400' },
               ].map((social) => (
                 <motion.a
                   key={social.label}
