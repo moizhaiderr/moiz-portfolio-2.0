@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Code, Smartphone, Globe, Zap } from 'lucide-react';
+import Image from 'next/image';
 
 const About = () => {
   const features = [
@@ -56,13 +57,15 @@ const About = () => {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="w-full h-96 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg flex items-center justify-center heritage-card">
-              <div className="text-center">
-                <div className="w-32 h-32 bg-gray-700 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-4xl">👨‍💻</span>
-                </div>
-                <p className="text-gray-400">Profile Image Placeholder</p>
-              </div>
+            <div className="relative w-full h-96 heritage-card overflow-hidden">
+              <Image
+                src="/images/profile.jpg"
+                alt="Moiz Haider - Software Engineer"
+                fill
+                className="object-cover object-center rounded-lg"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-lg"></div>
             </div>
           </motion.div>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ParticlesBackground from "@/components/ParticlesBackground";
 
 export const metadata: Metadata = {
   title: "Moiz Haider - Software Engineer Portfolio",
@@ -28,7 +29,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="antialiased">
+      <body className="antialiased relative">
+        <ParticlesBackground />
         {children}
       </body>
     </html>
