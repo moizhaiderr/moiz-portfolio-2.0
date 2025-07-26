@@ -1,109 +1,22 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ChevronDown, Github, Linkedin, Mail, Code, Zap, Palette } from 'lucide-react';
 
 const Hero = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    let animationId: number;
-    let scene: any, camera: any, renderer: any, cube: any;
-
-    const initThreeJS = async () => {
-      // Dynamic import to avoid SSR issues
-      const THREE = await import('three');
-
-      if (!canvasRef.current) return;
-
-      // Scene setup
-      scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-      renderer = new THREE.WebGLRenderer({ 
-        canvas: canvasRef.current,
-        alpha: true,
-        antialias: true 
-      });
-      
-      renderer.setSize(300, 300);
-      renderer.setClearColor(0x000000, 0);
-
-      // Create cube with text faces
-      const geometry = new THREE.BoxGeometry(2, 2, 2);
-      
-      // Create materials for each face with text
-      const faces = ['CODE', 'DESIGN', 'TEST', 'DEPLOY', 'DEBUG', 'SHIP'];
-      const materials = faces.map((text, index) => {
-        // Create canvas for text texture
-        const canvas = document.createElement('canvas');
-        canvas.width = 256;
-        canvas.height = 256;
-        const context = canvas.getContext('2d');
-        
-        if (context) {
-          // Set background
-          context.fillStyle = index % 2 === 0 ? '#1e40af' : '#3b82f6';
-          context.fillRect(0, 0, 256, 256);
-          
-          // Set text style
-          context.fillStyle = '#ffffff';
-          context.font = 'bold 32px Arial';
-          context.textAlign = 'center';
-          context.textBaseline = 'middle';
-          
-          // Draw text
-          context.fillText(text, 128, 128);
-        }
-        
-        // Create texture from canvas
-        const texture = new THREE.CanvasTexture(canvas);
-        return new THREE.MeshBasicMaterial({ map: texture });
-      });
-      
-      cube = new THREE.Mesh(geometry, materials);
-      scene.add(cube);
-
-      camera.position.z = 5;
-
-      // Animation loop
-      const animate = () => {
-        animationId = requestAnimationFrame(animate);
-        
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-        
-        renderer.render(scene, camera);
-      };
-
-      animate();
-    };
-
-    initThreeJS();
-
-    return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-      if (renderer) {
-        renderer.dispose();
-      }
-    };
-  }, []);
-
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20" />
       
       <div className="container mx-auto px-6 py-20 relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center md:text-left"
+            className="text-center lg:text-left"
           >
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -128,7 +41,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-lg text-gray-400 mb-8 max-w-lg mx-auto md:mx-0"
+              className="text-lg text-gray-400 mb-8 max-w-lg mx-auto lg:mx-0"
             >
               Passionate about creating innovative web and mobile applications 
               with modern technologies. I bring ideas to life through clean, 
@@ -139,7 +52,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-8"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -162,7 +75,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8 }}
-              className="flex gap-6 justify-center md:justify-start"
+              className="flex gap-6 justify-center lg:justify-start"
             >
               {[
                 { icon: Github, href: "https://github.com/moizhaiderr", label: "GitHub" },
@@ -183,19 +96,55 @@ const Hero = () => {
             </motion.div>
           </motion.div>
           
-          {/* Right side - 3D Cube */}
+          {/* Right side - Skill Icons & Animation */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex justify-center"
+            className="flex justify-center lg:justify-end"
           >
             <div className="relative">
-              <canvas
-                ref={canvasRef}
-                className="w-[300px] h-[300px]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl -z-10" />
+              {/* Main circle */}
+              <div className="w-80 h-80 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-blue-500/30 flex items-center justify-center">
+                <div className="w-64 h-64 rounded-full bg-gradient-to-br from-blue-600/30 to-purple-600/30 flex items-center justify-center">
+                  <div className="text-center">
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                      className="text-6xl mb-4"
+                    >
+                      💻
+                    </motion.div>
+                    <p className="text-white font-semibold text-lg">Building</p>
+                    <p className="text-blue-400">Amazing Apps</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating skill icons */}
+              <motion.div
+                animate={{ y: [-10, 10, -10] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -left-4 w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-blue-500/30"
+              >
+                <Code className="w-8 h-8 text-blue-400" />
+              </motion.div>
+              
+              <motion.div
+                animate={{ y: [10, -10, 10] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute -top-8 -right-8 w-16 h-16 bg-purple-600/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-purple-500/30"
+              >
+                <Zap className="w-8 h-8 text-purple-400" />
+              </motion.div>
+              
+              <motion.div
+                animate={{ y: [-5, 15, -5] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                className="absolute -bottom-4 -right-4 w-16 h-16 bg-cyan-600/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-cyan-500/30"
+              >
+                <Palette className="w-8 h-8 text-cyan-400" />
+              </motion.div>
             </div>
           </motion.div>
         </div>
