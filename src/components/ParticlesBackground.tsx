@@ -1,98 +1,20 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
-
-const ParticlesBackground = () => {
-  useEffect(() => {
-    const loadParticles = async () => {
-      try {
-        const { tsParticles } = await import("@tsparticles/engine");
-        const { loadSlim } = await import("@tsparticles/slim");
-        
-        await loadSlim(tsParticles);
-        
-        await tsParticles.load("tsparticles", {
-          background: {
-            color: {
-              value: "transparent",
-            },
-          },
-          fpsLimit: 120,
-          interactivity: {
-            events: {
-              onClick: {
-                enable: true,
-                mode: "push",
-              },
-              onHover: {
-                enable: true,
-                mode: "repulse",
-              },
-            },
-            modes: {
-              push: {
-                quantity: 4,
-              },
-              repulse: {
-                distance: 200,
-                duration: 0.4,
-              },
-            },
-          },
-          particles: {
-            color: {
-              value: "#3b82f6",
-            },
-            links: {
-              color: "#3b82f6",
-              distance: 150,
-              enable: true,
-              opacity: 0.2,
-              width: 1,
-            },
-            move: {
-              direction: "none",
-              enable: true,
-              outModes: {
-                default: "bounce",
-              },
-              random: false,
-              speed: 1,
-              straight: false,
-            },
-            number: {
-              density: {
-                enable: true,
-              },
-              value: 50,
-            },
-            opacity: {
-              value: 0.3,
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              value: { min: 1, max: 3 },
-            },
-          },
-          detectRetina: true,
-        });
-      } catch (error) {
-        console.error("Error loading particles:", error);
-      }
-    };
-
-    loadParticles();
-  }, []);
-
+const AnimatedBackground = () => {
   return (
-    <div 
-      id="tsparticles" 
-      className="absolute inset-0 -z-10"
-      style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}
-    />
+    <div className="fixed inset-0 -z-10 overflow-hidden">
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20 animate-gradient-shift" />
+      
+      {/* Floating orbs */}
+      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-float-slow" />
+      <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float-slower" />
+      <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-float-slowest" />
+      
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+    </div>
   );
 };
 
-export default ParticlesBackground;
+export default AnimatedBackground;

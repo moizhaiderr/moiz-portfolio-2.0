@@ -34,6 +34,10 @@ const config: Config = {
         'slide-up': 'slideUp 0.5s ease-out',
         'bounce-slow': 'bounce 2s infinite',
         'pulse-slow': 'pulse 3s infinite',
+        'gradient-shift': 'gradientShift 15s ease infinite',
+        'float-slow': 'floatSlow 6s ease-in-out infinite',
+        'float-slower': 'floatSlower 8s ease-in-out infinite',
+        'float-slowest': 'floatSlowest 10s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -43,6 +47,38 @@ const config: Config = {
         slideUp: {
           '0%': { transform: 'translateY(20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        gradientShift: {
+          '0%, 100%': {
+            'background-position': '0% 50%'
+          },
+          '50%': {
+            'background-position': '100% 50%'
+          },
+        },
+        floatSlow: {
+          '0%, 100%': {
+            transform: 'translateY(0px) translateX(0px)',
+          },
+          '50%': {
+            transform: 'translateY(-20px) translateX(10px)',
+          },
+        },
+        floatSlower: {
+          '0%, 100%': {
+            transform: 'translateY(0px) translateX(0px)',
+          },
+          '50%': {
+            transform: 'translateY(15px) translateX(-15px)',
+          },
+        },
+        floatSlowest: {
+          '0%, 100%': {
+            transform: 'translateY(0px) translateX(0px)',
+          },
+          '50%': {
+            transform: 'translateY(-25px) translateX(20px)',
+          },
         },
       },
     },
