@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website built with cutting-edge technologies to showcase software engineering skills and projects.
 
-**🚀 Live Demo: Coming Soon!**
+**🚀 Live Demo: [https://moiz-portfolio-2-0.vercel.app/](https://moiz-portfolio-2-0.vercel.app/)**
 
 ## 🚀 Tech Stack
 
