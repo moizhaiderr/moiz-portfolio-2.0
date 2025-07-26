@@ -2,6 +2,8 @@
 
 A modern, responsive portfolio website built with cutting-edge technologies to showcase software engineering skills and projects.
 
+**🚀 Live Demo: Coming Soon!**
+
 ## 🚀 Tech Stack
 
 - **Framework**: Next.js 15 with App Router
