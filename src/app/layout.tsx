@@ -8,6 +8,14 @@ export const metadata: Metadata = {
   keywords: "Software Engineer, Web Developer, React, Next.js, Mobile App Development",
   authors: [{ name: "Moiz Haider" }],
   creator: "Moiz Haider",
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.jpg', type: 'image/jpeg' }
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/favicon.jpg',
+  },
   openGraph: {
     title: "Moiz Haider - Software Engineer Portfolio",
     description: "Portfolio showcasing web development, mobile app development, and programming skills.",

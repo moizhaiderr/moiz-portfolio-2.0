@@ -2,8 +2,27 @@
 
 import { motion } from 'framer-motion';
 import { ChevronDown, Github, Linkedin, Mail, Code, Zap, Palette } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const Hero = () => {
+  const [particles, setParticles] = useState<Array<{left: number, top: number, duration: number, delay: number}>>([]);
+  const [symbolDurations, setSymbolDurations] = useState<number[]>([]);
+
+  useEffect(() => {
+    // Generate particles only on client side to avoid hydration mismatch
+    const generatedParticles = [...Array(50)].map(() => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      duration: 3 + Math.random() * 2,
+      delay: Math.random() * 3,
+    }));
+    setParticles(generatedParticles);
+
+    // Generate symbol durations
+    const durations = ['</>','{}','[]','()',';&','$'].map(() => 2 + Math.random());
+    setSymbolDurations(durations);
+  }, []);
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background gradient */}
@@ -50,22 +69,22 @@ const Hero = () => {
         />
         
         {/* Floating Particles */}
-        {[...Array(50)].map((_, i) => (
+        {particles.map((particle, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full opacity-60"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
             }}
             animate={{
               y: [-20, 20, -20],
               opacity: [0.6, 1, 0.6],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: particle.duration,
               repeat: Infinity,
-              delay: Math.random() * 3,
+              delay: particle.delay,
               ease: "easeInOut"
             }}
           />
@@ -236,7 +255,7 @@ const Hero = () => {
                       opacity: [0.6, 1, 0.6],
                     }}
                     transition={{
-                      duration: 2 + Math.random(),
+                      duration: symbolDurations[index] || 2,
                       repeat: Infinity,
                       delay: index * 0.5,
                       ease: "easeInOut"
